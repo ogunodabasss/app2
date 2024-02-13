@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @SuperBuilder
-@ToString(onlyExplicitlyIncluded = true,callSuper = true)
+@ToString(onlyExplicitlyIncluded = true, callSuper = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +23,11 @@ import java.util.List;
 @Entity
 @Table
 public class Product extends BaseEntity {
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @NotNull.List(value = @NotNull)
+    @NotNull
+    private final List<PastPrice> pastPrices = new ArrayList<>(0);
 
     @ToString.Include
     @EqualsAndHashCode.Include
@@ -41,20 +46,15 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private Integer amount;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @NotNull.List(value = @NotNull)
-    @NotNull
-    private final List<PastPrice> pastPrices = new ArrayList<>(0);
-
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false, length = 3)
     private Category category;
 
-    public void addPastPrice(PastPrice pastPrice){
+    public void addPastPrice(PastPrice pastPrice) {
         pastPrices.add(pastPrice);
     }
 
-    public void removePastPrice(PastPrice pastPrice){
+    public void removePastPrice(PastPrice pastPrice) {
         pastPrices.remove(pastPrice);
     }
 

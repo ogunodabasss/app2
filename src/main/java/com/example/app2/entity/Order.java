@@ -31,7 +31,7 @@ public class Order extends BaseEntity {
 
     @ToString.Include(name = "id")
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id", referencedColumnName = "id",nullable = false,unique = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product product;
 
     @Min(1)
@@ -48,8 +48,8 @@ public class Order extends BaseEntity {
     @Nullable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "cart_id", referencedColumnName = "id",nullable = false,unique = false),
-            @JoinColumn(name = "customer_id", referencedColumnName = "customer_id",nullable = false,unique = false)
+            @JoinColumn(name = "cart_id", referencedColumnName = "id", nullable = false),
+            @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     })
     private Cart cart;
 
